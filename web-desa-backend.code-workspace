@@ -1,0 +1,22 @@
+{
+  "folders": [
+    {
+      "path": "api-gateway"
+    },
+    {
+      "path": "message-service"
+    },
+    {
+      "path": "user-service"
+    },
+    {
+      "path": "news-service"
+    },
+    {
+      "path": "comment-service"
+    },
+    {
+      "path": "agenda-service"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+http:
+  port: 3001
+apiEndpoints:
+  # see: http://www.express-gateway.io/docs/configuration/gateway.config.yml/apiEndpoints
+  user:
+    path: /api/users/*
+    target: http://localhost:3002
+  message:
+    path: /api/messages/*
+    target: http://localhost:3003
+  news:
+    path: /api/news/*
+    target: http://localhost:3004
+  agenda:
+    path: /api/agenda/*
+    target: http://localhost:3006
+  comment:
+    path: /api/comments/*
+    target: http://localhost:3005
+serviceEndpoints:
+  # see: http://www.express-gateway.io/docs/configuration/gateway.config.yml/serviceEndpoints
+  user-service:
+    url: http://localhost:3002
+  message-service:
+    url: http://localhost:3003
+  news-service:
+    url: http://localhost:3004
+  agenda-service:
+    url: http://localhost:3006
+  comment-service:
+    url: http://localhost:3005
+policies:
+  - proxy
+pipelines:
+  # see: https://www.express-gateway.io/docs/configuration/gateway.config.yml/pipelines
+  user-pipeline:
+    apiEndpoints:
+      - user
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: user-service
+  message-pipeline:
+    apiEndpoints:
+      - message
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: message-service
+  news-pipeline:
+    apiEndpoints:
+      - news
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: news-service
+  agenda-pipeline:
+    apiEndpoints:
+      - agenda
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: agenda-service
+  comment-pipeline:
+    apiEndpoints:
+      - comment
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: comment-service
