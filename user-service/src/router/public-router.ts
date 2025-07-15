@@ -6,6 +6,6 @@ export const publicRouter = express.Router();
 publicRouter.post("/register", UserController.register);
 publicRouter.post("/login", UserController.login);
 publicRouter.post("/forgot-password", UserController.forgotPassword);
-publicRouter.post("/reset-password", UserController.resetPassword);
+publicRouter.post("/reset-password/:token", UserController.resetPassword);
 
 publicRouter.get("/:userId", PublicController.getUserById);

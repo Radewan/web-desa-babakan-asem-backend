@@ -21,15 +21,15 @@ export class UserController {
   static async forgotPassword(req: Request, res: Response, next: NextFunction) {
     try {
       await UserService.forgotPassword(req.body);
-      res.status(200).json({ message: "Password reset link sent" });
+      res.status(204).json({});
     } catch (error) {
       next(error);
     }
   }
   static async resetPassword(req: Request, res: Response, next: NextFunction) {
     try {
-      // await UserService.resetPassword(req.body);
-      res.status(200).json({ message: "Password reset successfully" });
+      await UserService.resetPassword(req.body, req.params.token);
+      res.status(204).json({});
     } catch (error) {
       next(error);
     }

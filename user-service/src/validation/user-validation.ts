@@ -17,6 +17,11 @@ export class UserValidation {
     email: z.string().email(),
   });
 
+  static resetPassword: ZodType = z.object({
+    password: z.string().min(6),
+    confirm_password: z.string().min(6),
+  });
+
   static update: ZodType = z.object({
     name: z.string().optional(),
     email: z.string().email().optional(),

@@ -18,8 +18,6 @@ export class AdminController {
       }
       if (role === Role.ADMIN) {
         role = Role.ADMIN;
-      } else if (role === Role.CONTRIBUTOR) {
-        role = Role.CONTRIBUTOR;
       } else {
         role = Role.REGULAR;
       }

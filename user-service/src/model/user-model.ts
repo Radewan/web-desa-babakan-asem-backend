@@ -42,6 +42,15 @@ export interface UserCreateRequest {
   role: Role;
 }
 
+export interface UserForgotPasswordRequest {
+  email: string;
+}
+
+export interface UserResetPasswordRequest {
+  password: string;
+  confirm_password: string;
+}
+
 export const toUserResponse = (user: User): UserResponse => {
   return {
     id: user.id,

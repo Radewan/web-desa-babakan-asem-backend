@@ -13,19 +13,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  id String @id @default(uuid())
-  name String @db.VarChar(255)
-  email String @db.VarChar(255) @unique
-  password String @db.VarChar(255)
-  role Role 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+model User {
+  id                 String    @id @default(uuid())
+  name               String    @db.VarChar(255)
+  email              String    @unique @db.VarChar(255)
+  password           String    @db.VarChar(255)
+  role               Role
+  reset_token        String?   @db.VarChar(500)
+  reset_token_expiry DateTime?
+  created_at         DateTime  @default(now())
+  updated_at         DateTime  @updatedAt
+
   @@map("users")
 }
 
 enum Role {
   REGULAR
-  CONTRIBUTOR
   ADMIN
 }
