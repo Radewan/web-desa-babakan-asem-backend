@@ -81,7 +81,6 @@ export class AdminController {
     next: NextFunction
   ) {
     try {
-      console.log("delete by admin");
       await AdminService.deleteByAdmin(req.user!, req.header("Authorization")!);
       res.status(204).json({});
     } catch (error) {

@@ -28,4 +28,5 @@ model Comment{
 enum TargetType {
   NEWS
   AGENDA
+  PRODUCT
 }

@@ -5,15 +5,23 @@ import { PrivateService } from "../service/private-service";
 export class PrivateController {
   static async create(req: UserRequest, res: Response, next: NextFunction) {
     try {
-      const response = await PrivateService.create(req.body, req.params.targetId,req.user!);
-      return res.status(201).json(response)
+      const response = await PrivateService.create(
+        req.body,
+        req.params.targetId,
+        req.user!
+      );
+      return res.status(201).json(response);
     } catch (error) {
       next(error);
     }
   }
   static async update(req: UserRequest, res: Response, next: NextFunction) {
     try {
-      const response = await PrivateService.update(req.body, req.params.commentId, req.user!);
+      const response = await PrivateService.update(
+        req.body,
+        req.params.commentId,
+        req.user!
+      );
       return res.status(200).json(response);
     } catch (error) {
       next(error);
@@ -21,21 +29,42 @@ export class PrivateController {
   }
   static async delete(req: UserRequest, res: Response, next: NextFunction) {
     try {
-      const response = await PrivateService.delete(req.params.commentId, req.user!);
+      const response = await PrivateService.delete(
+        req.params.commentId,
+        req.user!
+      );
       return res.status(200).json(response);
     } catch (error) {
       next(error);
     }
   }
-  static async deleteByTarget(req: UserRequest, res: Response, next: NextFunction) {
+  static async deleteByTarget(
+    req: UserRequest,
+    res: Response,
+    next: NextFunction
+  ) {
     try {
-      const response = await PrivateService.deleteByTarget(req.params.targetId, req.user!);
+      const { targetType } = req.query;
+
+      if (!targetType) {
+        return res.status(400).json({ message: "targetType is required" });
+      }
+      console.log(`Deleting comments for target ID: ${targetType}`);
+      const response = await PrivateService.deleteByTarget(
+        req.params.targetId,
+        req.user!,
+        targetType as string
+      );
       return res.status(200).json(response);
     } catch (error) {
       next(error);
     }
   }
-  static async deleteByUser(req: UserRequest, res: Response, next: NextFunction) {
+  static async deleteByUser(
+    req: UserRequest,
+    res: Response,
+    next: NextFunction
+  ) {
     try {
       const response = await PrivateService.deleteByUser(req.user!);
       return res.status(200).json(response);

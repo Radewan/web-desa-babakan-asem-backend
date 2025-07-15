@@ -57,30 +57,29 @@ export class AuthService {
   static async delete(user: UserResponse, token: string) {
     if (user.role === "ADMIN") {
       await Promise.all([
-        await axios.delete(
-          "http://localhost:3001/api/news/admin/delete-by-admin",
+        axios.delete("http://localhost:3001/api/news/admin/delete-by-admin", {
+          headers: {
+            Authorization: token,
+          },
+        }),
+        axios.delete("http://localhost:3001/api/agenda/admin/delete-by-admin", {
+          headers: {
+            Authorization: token,
+          },
+        }),
+        axios.delete(
+          "http://localhost:3001/api/products/admin/delete-by-admin",
           {
             headers: {
               Authorization: token,
             },
           }
         ),
-        await axios.delete(
-          "http://localhost:3001/api/agenda/admin/delete-by-admin",
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        ),
-        await axios.delete(
-          "http://localhost:3001/api/comments/delete-by-user",
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        ),
+        axios.delete("http://localhost:3001/api/comments/delete-by-user", {
+          headers: {
+            Authorization: token,
+          },
+        }),
       ]);
     } else if (user.role === "REGULAR") {
       await axios.delete("http://localhost:3001/api/comments/delete-by-user", {

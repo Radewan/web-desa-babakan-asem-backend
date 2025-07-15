@@ -126,7 +126,7 @@ export class AdminService {
     }
 
     await axios.delete(
-      `http://localhost:3001/api/comments/delete-by-target/${agendaId}`,
+      `http://localhost:3001/api/comments/delete-by-target/${agendaId}?targetType=AGENDA`,
       {
         headers: {
           Authorization: token,

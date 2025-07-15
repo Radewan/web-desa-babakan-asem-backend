@@ -70,7 +70,7 @@ export class AdminController {
         req.user!,
         req.header("Authorization")!
       );
-      res.status(200).json({});
+      res.status(204).json({});
     } catch (error) {
       next(error);
     }

@@ -86,14 +86,45 @@ export class PrivateService {
 
     return { comment: commentDelete };
   }
-  static async deleteByTarget(targetId: string, user: UserResponse) {
-    const news = await axios.get(`http://localhost:3001/api/news/${targetId}`);
-    if (news.data.news.userId !== user.id) {
-      throw new ResponseError(
-        403,
-        "You are not authorized to delete comments for this target"
+  static async deleteByTarget(
+    targetId: string,
+    user: UserResponse,
+    targetType: string
+  ) {
+    if (targetType === TargetType.NEWS) {
+      const news = await axios.get(
+        `http://localhost:3001/api/news/${targetId}`
       );
+      if (news.data.news.userId !== user.id) {
+        throw new ResponseError(
+          403,
+          "You are not authorized to delete comments for this target"
+        );
+      }
+    } else if (targetType === TargetType.AGENDA) {
+      const agenda = await axios.get(
+        `http://localhost:3001/api/agenda/${targetId}`
+      );
+      if (agenda.data.agenda.userId !== user.id) {
+        throw new ResponseError(
+          403,
+          "You are not authorized to delete comments for this target"
+        );
+      }
+    } else if (targetType === TargetType.PRODUCT) {
+      const product = await axios.get(
+        `http://localhost:3001/api/product/${targetId}`
+      );
+      if (product.data.product.userId !== user.id) {
+        throw new ResponseError(
+          403,
+          "You are not authorized to delete comments for this target"
+        );
+      }
+    } else {
+      throw new ResponseError(400, "Invalid target type");
     }
+
     await prismaClient.comment.deleteMany({
       where: {
         target_id: targetId,
