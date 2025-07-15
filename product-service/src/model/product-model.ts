@@ -16,19 +16,24 @@ export interface ProductUpdateRequest {
   link_whatsapp?: string;
 }
 
-export interface ProductGetAllResponse {
+export interface ProductWithRating {
+  product: Product;
+  average_rating: number;
+}
+
+export interface ProductWithRatingGetAllResponse {
   total_page: number;
   page: number;
   limit: number;
-  products: Product[];
+  products: ProductWithRating[];
 }
 
-export const toProductGetAllResponse = (
+export const toProductWithRatingGetAllResponse = (
   total_page: number,
   page: number,
   limit: number,
-  products: Product[]
-): ProductGetAllResponse => {
+  products: ProductWithRating[]
+): ProductWithRatingGetAllResponse => {
   return {
     total_page: Math.ceil(total_page / limit),
     page,

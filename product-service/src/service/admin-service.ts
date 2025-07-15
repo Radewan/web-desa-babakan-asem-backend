@@ -5,7 +5,7 @@ import { prismaClient } from "../application/database";
 import {
   ProductCreateRequest,
   ProductUpdateRequest,
-  toProductGetAllResponse,
+  toProductWithRatingGetAllResponse,
 } from "../model/product-model";
 import { UserResponse } from "../model/user-model";
 import { Validation } from "../validation/validation";
@@ -95,13 +95,35 @@ export class AdminService {
       orderBy: {
         created_at: "desc",
       },
+      include: {
+        ratings: true,
+      },
     });
+
+    const producsWithRating = products.map((product) => {
+      const averageRating =
+        product.ratings.length > 0
+          ? product.ratings.reduce((sum, rating) => sum + rating.rating, 0) /
+            product.ratings.length
+          : 0;
+      return {
+        product: product,
+        average_rating: averageRating,
+      };
+    });
+
     const totalProduct = await prismaClient.product.count({
       where: {
         user_id: user.id,
       },
     });
-    return toProductGetAllResponse(totalProduct, page, limit, products);
+
+    return toProductWithRatingGetAllResponse(
+      totalProduct,
+      page,
+      limit,
+      producsWithRating
+    );
   }
   static async create(
     request: ProductCreateRequest,

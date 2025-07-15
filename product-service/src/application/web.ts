@@ -4,6 +4,7 @@ import { errorMiddleware } from "../middleware/error-middleware";
 import { publicRouter } from "../router/public-router";
 import path from "node:path";
 import { adminRouter } from "../router/admin-router";
+import { privateRouter } from "../router/private-router";
 
 export const web = express();
 
@@ -30,6 +31,7 @@ web.use(
 );
 
 web.use("/api/products", publicRouter);
+web.use("/api/products", privateRouter);
 web.use("/api/products/admin", adminRouter);
 
 web.use(errorMiddleware);

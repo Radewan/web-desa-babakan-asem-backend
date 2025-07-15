@@ -21,8 +21,7 @@ model Product {
   description    String   @db.Text
   price          Float
   featured_image String   @db.VarChar(255)
-  rating         Float    @default(0)
-  link_whatsapp String @db.VarChar(255)
+  link_whatsapp  String   @db.VarChar(255)
   created_at     DateTime @default(now())
   updated_at     DateTime @updatedAt
 
@@ -43,11 +42,11 @@ model Category {
   @@map("categories")
 }
 
-model Rating{
+model Rating {
   id         String   @id @default(uuid())
   user_id    String
   product_id String
-  rating     Float
+  rating     Int
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
