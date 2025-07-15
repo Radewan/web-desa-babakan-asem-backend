@@ -1,7 +1,7 @@
 import axios from "axios";
 import { prismaClient } from "../application/database";
 import { ResponseError } from "../error/response-error";
-import { toNewsGetAllResponse } from "../model/news-model";
+import { toNewsWithUserGetAllResponse } from "../model/news-model";
 
 export class PublicService {
   static async getAll(page: number, limit: number) {
@@ -20,7 +20,24 @@ export class PublicService {
         is_published: true,
       },
     });
-    return toNewsGetAllResponse(totalMessages, page, limit, news);
+    const newsWithUser = await Promise.all(
+      news.map(async (n) => {
+        const response = await axios.get(
+          `http://localhost:3001/api/users/${n.userId}`
+        );
+        return {
+          user_created: response.data.user,
+          news: n,
+        };
+      })
+    );
+    console.log(newsWithUser);
+    return toNewsWithUserGetAllResponse(
+      totalMessages,
+      page,
+      limit,
+      newsWithUser
+    );
   }
 
   static async getById(newsId: string) {
@@ -47,7 +64,7 @@ export class PublicService {
     return {
       user_created: user.data.user,
       news: news,
-      comments: comments.data,
+      comments: comments.data.comments,
     };
   }
 }

@@ -12,6 +12,7 @@ export class PublicService {
         created_at: "desc",
       },
     });
+
     const totalProduct = await prismaClient.product.count({});
     return toProductGetAllResponse(totalProduct, page, limit, products);
   }
@@ -33,7 +34,7 @@ export class PublicService {
     return {
       user_created: user.data.user,
       product: product,
-      comments: comments.data,
+      comments: comments.data.comments,
     };
   }
 }

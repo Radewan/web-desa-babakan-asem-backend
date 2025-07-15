@@ -18,12 +18,12 @@ export class PublicService {
           `http://localhost:3001/api/users/${comment.user_id}`
         );
         return {
-          ...comment,
           ...response.data,
+          ...comment,
         };
       })
     );
 
-    return { enrichedComments };
+    return { comments: enrichedComments };
   }
 }

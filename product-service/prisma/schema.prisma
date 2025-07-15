@@ -27,6 +27,7 @@ model Product {
   updated_at     DateTime @updatedAt
 
   category Category @relation(fields: [category_id], references: [id])
+  ratings  Rating[]
 
   @@map("products")
 }
@@ -40,4 +41,17 @@ model Category {
   products Product[]
 
   @@map("categories")
+}
+
+model Rating{
+  id         String   @id @default(uuid())
+  user_id    String
+  product_id String
+  rating     Float
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  product Product @relation(fields: [product_id], references: [id])
+
+  @@map("ratings")
 }

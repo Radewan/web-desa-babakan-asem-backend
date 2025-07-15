@@ -47,7 +47,7 @@ export class PublicService {
     return {
       user_created: user.data.user,
       agenda: agenda,
-      comments: comments.data,
+      comments: comments.data.comments,
     };
   }
 }

@@ -13,20 +13,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Agenda{
-  id String @id @default(uuid())
-  userId String
-  title String @db.VarChar(255)
-  content String @db.Text
-  featured_image String @db.VarChar(255)
-  location String @db.VarChar(255)
-  start_time DateTime
-  end_time DateTime
-  view_count Int @default(0)
-  is_published Boolean @default(false)
-  published_at DateTime?
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+model Agenda {
+  id             String    @id @default(uuid())
+  userId         String
+  title          String    @db.VarChar(255)
+  content        String    @db.Text
+  featured_image String    @db.VarChar(255)
+  location       String    @db.VarChar(255)
+  start_time     DateTime
+  end_time       DateTime
+  view_count     Int       @default(0)
+  is_published   Boolean   @default(false)
+  published_at   DateTime?
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
 
   @@map("agenda")
 }
+
+// enum AgendaType {
+//   REGULAR
+//   PKK
+//   KARANG_TARUNA
+// }
