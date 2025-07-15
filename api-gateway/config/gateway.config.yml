@@ -17,6 +17,12 @@ apiEndpoints:
   comment:
     path: /api/comments/*
     target: http://localhost:3005
+  galeri:
+    path: /api/galeri/*
+    target: http://localhost:3007
+  product:
+    path: /api/products/*
+    target: http://localhost:3008
 serviceEndpoints:
   # see: http://www.express-gateway.io/docs/configuration/gateway.config.yml/serviceEndpoints
   user-service:
@@ -29,6 +35,10 @@ serviceEndpoints:
     url: http://localhost:3006
   comment-service:
     url: http://localhost:3005
+  galeri-service :
+    url: http://localhost:3007
+  product-service:
+    url: http://localhost:3008
 policies:
   - proxy
 pipelines:
@@ -68,3 +78,17 @@ pipelines:
       - proxy:
           - action:
               serviceEndpoint: comment-service
+  galeri-pipeline:
+    apiEndpoints:
+      - galeri
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: galeri-service
+  product-pipeline:
+    apiEndpoints:
+      - product
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: product-service

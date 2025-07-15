@@ -17,6 +17,12 @@
     },
     {
       "path": "agenda-service"
+    },
+    {
+      "path": "galeri-service"
+    },
+    {
+      "path": "product-service"
     }
   ]
 }
