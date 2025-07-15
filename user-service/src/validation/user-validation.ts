@@ -7,10 +7,12 @@ export class UserValidation {
     email: z.string().email(),
     password: z.string().min(6),
     confirm_password: z.string().min(6),
+    remember_me: z.boolean(),
   });
   static login: ZodType = z.object({
     email: z.string().email(),
     password: z.string().min(6),
+    remember_me: z.boolean(),
   });
 
   static forgotPassword: ZodType = z.object({

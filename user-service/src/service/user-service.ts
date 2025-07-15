@@ -46,9 +46,16 @@ export class UserService {
     });
 
     const userResponse = toUserResponse(user);
-    const token = jwt.sign(userResponse, process.env.JWT_SECRET_KEY!, {
-      expiresIn: "1w",
-    });
+    let token: string;
+    if ((request as any).remember_me) {
+      token = jwt.sign(userResponse, process.env.JWT_SECRET_KEY!, {
+        expiresIn: "1Y",
+      });
+    } else {
+      token = jwt.sign(userResponse, process.env.JWT_SECRET_KEY!, {
+        expiresIn: "1W",
+      });
+    }
 
     return {
       token: token,
@@ -67,9 +74,16 @@ export class UserService {
     }
 
     const userResponse = toUserResponse(user);
-    const token = jwt.sign(userResponse, process.env.JWT_SECRET_KEY!, {
-      expiresIn: "1w",
-    });
+    let token: string;
+    if ((request as any).remember_me) {
+      token = jwt.sign(userResponse, process.env.JWT_SECRET_KEY!, {
+        expiresIn: "1Y",
+      });
+    } else {
+      token = jwt.sign(userResponse, process.env.JWT_SECRET_KEY!, {
+        expiresIn: "1W",
+      });
+    }
 
     return {
       token: token,

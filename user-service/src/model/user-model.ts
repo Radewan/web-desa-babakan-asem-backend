@@ -21,11 +21,13 @@ export interface UserRegisterRequest {
   email: string;
   password: string;
   confirm_password: string;
+  remember_me: boolean;
 }
 
 export interface UserLoginRequest {
   email: string;
   password: string;
+  remember_me: boolean;
 }
 
 export interface UserUpdateRequest {
