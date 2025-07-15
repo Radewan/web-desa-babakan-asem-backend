@@ -65,12 +65,12 @@ export class AdminController {
   }
   static async delete(req: UserRequest, res: Response, next: NextFunction) {
     try {
-      const response = await AdminService.delete(
+      await AdminService.delete(
         req.params.newsId,
         req.user!,
         req.header("Authorization")!
       );
-      res.status(200).json(response);
+      res.status(204).json({});
     } catch (error) {
       next(error);
     }

@@ -48,8 +48,8 @@ export class MessageController {
   static async delete(req: Request, res: Response, next: NextFunction) {
     try {
       const { messageId } = req.params;
-      const response = await MessageService.delete(messageId);
-      res.status(200).json(response);
+      await MessageService.delete(messageId);
+      res.status(204).json({});
     } catch (error) {
       next(error);
     }

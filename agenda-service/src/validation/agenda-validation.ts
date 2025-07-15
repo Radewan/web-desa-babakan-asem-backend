@@ -1,3 +1,4 @@
+import { AgendaType } from "@prisma/client";
 import z, { ZodType } from "zod";
 
 export class AgendaValidation {
@@ -8,6 +9,7 @@ export class AgendaValidation {
     start_time: z.string().datetime(),
     end_time: z.string().datetime(),
     is_published: z.boolean().optional(),
+    type: z.nativeEnum(AgendaType), // Assuming AgendaType is an enum in Prisma
   });
   static update: ZodType = z.object({
     title: z.string().optional(),
@@ -16,5 +18,6 @@ export class AgendaValidation {
     start_time: z.string().datetime().optional(),
     end_time: z.string().datetime().optional(),
     is_published: z.boolean().optional(),
+    type: z.nativeEnum(AgendaType).optional(), // Assuming AgendaType is an enum in Prisma
   });
 }

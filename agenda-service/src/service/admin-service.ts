@@ -11,18 +11,21 @@ import { Validation } from "../validation/validation";
 import path from "node:path";
 import fs from "node:fs/promises";
 import axios from "axios";
+import { AgendaType } from "@prisma/client";
 
 export class AdminService {
   static async getOwn(
     user: UserResponse,
     page: number,
     limit: number,
-    isPublished: boolean | undefined
+    isPublished: boolean | undefined,
+    type: AgendaType
   ) {
     const agenda = await prismaClient.agenda.findMany({
       where: {
         ...(isPublished !== undefined && { is_published: isPublished }),
         userId: user.id,
+        ...(type && { type: type }),
       },
       skip: (page - 1) * limit,
       take: limit,
@@ -30,13 +33,14 @@ export class AdminService {
         created_at: "desc",
       },
     });
-    const totalMessages = await prismaClient.agenda.count({
+    const totalAgenda = await prismaClient.agenda.count({
       where: {
         ...(isPublished !== undefined && { is_published: isPublished }),
         userId: user.id,
+        ...(type && { type: type }),
       },
     });
-    return toAgendaGetAllResponse(totalMessages, page, limit, agenda);
+    return toAgendaGetAllResponse(totalAgenda, page, limit, agenda);
   }
   static async create(
     request: AgendaCreateRequest,
@@ -98,6 +102,10 @@ export class AdminService {
       data: {
         ...(request.title && { title: request.title }),
         ...(request.content && { content: request.content }),
+        ...(request.start_time && { start_date: request.start_time }),
+        ...(request.end_time && { end_date: request.end_time }),
+        ...(request.location && { location: request.location }),
+        ...(request.type && { type: request.type }),
         ...(request.is_published === true && {
           is_published: request.is_published,
           published_at: new Date(),

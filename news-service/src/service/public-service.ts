@@ -15,7 +15,7 @@ export class PublicService {
         created_at: "desc",
       },
     });
-    const totalMessages = await prismaClient.news.count({
+    const totalAgenda = await prismaClient.news.count({
       where: {
         is_published: true,
       },
@@ -31,9 +31,8 @@ export class PublicService {
         };
       })
     );
-    console.log(newsWithUser);
     return toNewsWithUserGetAllResponse(
-      totalMessages,
+      totalAgenda,
       page,
       limit,
       newsWithUser

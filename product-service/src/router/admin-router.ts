@@ -27,3 +27,5 @@ adminRouter.patch(
 );
 adminRouter.delete("/delete-by-product/:productId", AdminController.delete);
 adminRouter.delete("/delete-by-admin", AdminController.deleteByAdmin);
+
+// adminRouter.

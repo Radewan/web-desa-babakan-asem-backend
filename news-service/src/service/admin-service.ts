@@ -134,7 +134,7 @@ export class AdminService {
       }
     );
 
-    const newsDelete = await prismaClient.news.delete({
+    await prismaClient.news.delete({
       where: { id: newsId },
     });
 
@@ -147,8 +147,6 @@ export class AdminService {
     );
 
     await fs.unlink(filePath);
-
-    return newsDelete;
   }
   static async deleteByAdmin(user: UserResponse, token: string) {
     const news = await prismaClient.news.findMany({

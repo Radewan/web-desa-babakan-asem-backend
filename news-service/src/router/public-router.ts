@@ -4,3 +4,4 @@ export const publicRouter = express.Router();
 
 publicRouter.get("/", PublicController.getAll);
 publicRouter.get("/:userId", PublicController.getById);
+

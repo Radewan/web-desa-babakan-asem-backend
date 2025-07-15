@@ -70,11 +70,10 @@ export class MessageService {
       throw new ResponseError(404, "Message not found");
     }
 
-    const messageDelete = await prismaClient.message.delete({
+    await prismaClient.message.delete({
       where: {
         id: messageId,
       },
     });
-    return messageDelete;
   }
 }
