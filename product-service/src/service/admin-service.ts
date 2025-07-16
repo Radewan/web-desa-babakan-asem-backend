@@ -224,7 +224,7 @@ export class AdminService {
     }
 
     await axios.delete(
-      `http://localhost:3001/api/comments/delete-by-target/${productId}`,
+      `http://localhost:3001/api/comments/delete-by-target/${productId}?targetType=PRODUCT`,
       {
         headers: {
           Authorization: token,
@@ -255,7 +255,7 @@ export class AdminService {
     await Promise.all(
       products.map((product) => {
         return axios.delete(
-          `http://localhost:3001/api/comments/delete-by-target/${product.id}`,
+          `http://localhost:3001/api/comments/delete-by-target/${product.id}?targetType=PRODUCT`,
           {
             headers: {
               Authorization: token,

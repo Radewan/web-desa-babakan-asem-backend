@@ -102,8 +102,6 @@ export class PrivateService {
         );
       }
     } else if (targetType === TargetType.AGENDA) {
-      console.log("Fetching agenda for target ID:", targetId);
-
       const agenda = await axios.get(
         `http://localhost:3001/api/agenda/${targetId}`
       );
@@ -115,9 +113,9 @@ export class PrivateService {
       }
     } else if (targetType === TargetType.PRODUCT) {
       const product = await axios.get(
-        `http://localhost:3001/api/product/${targetId}`
+        `http://localhost:3001/api/products/${targetId}`
       );
-      if (product.data.product.userId !== user.id) {
+      if (product.data.product.user_id !== user.id) {
         throw new ResponseError(
           403,
           "You are not authorized to delete comments for this target"

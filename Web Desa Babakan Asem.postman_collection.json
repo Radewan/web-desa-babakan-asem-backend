@@ -563,7 +563,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{BASE_URL}}/agenda/admin/me?page=1&limit=10&is_published=true&type=KARANG_TARUNA",
+									"raw": "{{BASE_URL}}/agenda/admin/me?page=1&limit=10&is_published=true",
 									"host": [
 										"{{BASE_URL}}"
 									],
@@ -587,7 +587,8 @@
 										},
 										{
 											"key": "type",
-											"value": "KARANG_TARUNA"
+											"value": "KARANG_TARUNA",
+											"disabled": true
 										}
 									]
 								}
@@ -755,7 +756,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{BASE_URL}}/agenda/696befc5-59f7-49cc-aed7-ad98dc743502"
+						"url": "{{BASE_URL}}/agenda/0510d439-178a-4f60-9e01-218dd6cba0af"
 					},
 					"response": []
 				}
@@ -913,7 +914,7 @@
 								},
 								"method": "DELETE",
 								"header": [],
-								"url": "{{BASE_URL}}/products/admin/delete-by-product/d0d4beaa-ff51-47f6-9c5f-31bc432795b4"
+								"url": "{{BASE_URL}}/products/admin/delete-by-product/6ddc3c80-ddf6-4056-915f-74b1e518ef3f"
 							},
 							"response": []
 						},
@@ -1079,7 +1080,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{BASE_URL}}/products/8f9678a0-0661-41cb-a6b4-cfeb0c9e9ae4"
+						"url": "{{BASE_URL}}/products/6ddc3c80-ddf6-4056-915f-74b1e518ef3f"
 					},
 					"response": []
 				}
@@ -1171,19 +1172,19 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{BASE_URL}}/comments/delete-by-target/0510d439-178a-4f60-9e01-218dd6cba0af?targetType=AGENDA",
+									"raw": "{{BASE_URL}}/comments/delete-by-target/6ddc3c80-ddf6-4056-915f-74b1e518ef3f?targetType=PRODUCT",
 									"host": [
 										"{{BASE_URL}}"
 									],
 									"path": [
 										"comments",
 										"delete-by-target",
-										"0510d439-178a-4f60-9e01-218dd6cba0af"
+										"6ddc3c80-ddf6-4056-915f-74b1e518ef3f"
 									],
 									"query": [
 										{
 											"key": "targetType",
-											"value": "AGENDA"
+											"value": "PRODUCT"
 										}
 									]
 								}
