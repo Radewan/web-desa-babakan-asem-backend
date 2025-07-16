@@ -1,0 +1,1315 @@
+{
+	"info": {
+		"_postman_id": "924da154-f085-486f-b698-a7c70807b9c3",
+		"name": "Web Desa Babakan Asem",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "40129308"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Create Admin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Restu Admin\",\r\n    \"email\": \"restuadmin@gmail.com\",\r\n    \"password\": \"password\",\r\n    \"confirm_password\" : \"password\",\r\n    \"role\": \"ADMIN\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/users/admin"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Role By User Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"role\": \"REGULAR\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/users/admin/0fdcb98e-560d-491c-aca7-76cffdca3aa2"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "{{BASE_URL}}/users/"
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Rangga Admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/users/"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "{{BASE_URL}}/users/"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = JSON.parse(responseBody)\r",
+									"\r",
+									"if(response.token){\r",
+									"    pm.collectionVariables.set(\"TOKEN\", response.token)\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rangga\",\r\n    \"email\": \"ranggadendi6@gmail.com\",\r\n    \"password\": \"password\",\r\n    \"confirm_password\" : \"password\",\r\n    \"remember_me\": false\r\n\r\n\r\n    // \"name\": \"Restu\",\r\n    // \"email\": \"restu12@gmail.com\",\r\n    // \"password\": \"password\",\r\n    // \"confirm_password\" : \"password\",\r\n    // \"remember_me\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/users/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = JSON.parse(responseBody)\r",
+									"\r",
+									"if(response.token){\r",
+									"    pm.collectionVariables.set(\"TOKEN\", response.token)\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"email\": \"restu1@gmail.com\",\r\n    // \"password\": \"password\",\r\n    // \"remember_me\" : false\r\n\r\n    \"email\": \"ranggadendi6@gmail.com\",\r\n    \"password\": \"password\",\r\n    \"remember_me\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/users/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ranggadendi6@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/users/forgot-password"
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"passwordUpate\",\r\n    \"confirm_password\": \"passwordUpate\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/users/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFlMjUyNTJlLWRjZjktNGY5NC05MGU2LWQyNWUzZTEyNzY3NSIsIm5hbWUiOiJSYW5nZ2EiLCJlbWFpbCI6InJhbmdnYWRlbmRpNkBnbWFpbC5jb20iLCJyb2xlIjoiUkVHVUxBUiIsImNyZWF0ZWRfYXQiOiIyMDI1LTA3LTE1VDAzOjM5OjM0LjIwNVoiLCJ1cGRhdGVkX2F0IjoiMjAyNS0wNy0xNVQwMzozOTozNC4yMDVaIiwiaWF0IjoxNzUyNTUwNzgxLCJleHAiOjE3NTI1NTQzODF9.ZTUk9GcjK5nBoUJyUND4M5mQ7WKPURiRoF51FFunWkY"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}/users/98ce336f-e5ba-4ac7-a974-53b392f75f5f"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Message",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Get All",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/messages/?page=1&limit=2",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"messages",
+										""
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "2"
+										},
+										{
+											"key": "is_read",
+											"value": "false",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "PATCH",
+								"header": [],
+								"url": "{{BASE_URL}}/messages/79774a9a-f8e1-4f0f-b537-a5db67fd2822"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "{{BASE_URL}}/messages/79774a9a-f8e1-4f0f-b537-a5db67fd2822"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Aufa\",\r\n    \"email\": \"aufa@gmail.com\",\r\n    \"message\":\"Websitenya bagus sekali\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL}}/messages/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "News",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Get Own News",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/news/admin/me?page=1&limit=10",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"news",
+										"admin",
+										"me"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "is_published",
+											"value": "true",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create News",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "News 1",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "Ini content News 1",
+											"type": "text"
+										},
+										{
+											"key": "featured_image",
+											"type": "file",
+											"src": "postman-cloud:///1efb088b-e553-4230-aee6-a211d1c733a0"
+										},
+										{
+											"key": "is_published",
+											"value": "true",
+											"type": "text"
+										}
+									]
+								},
+								"url": "{{BASE_URL}}/news/admin/create"
+							},
+							"response": []
+						},
+						{
+							"name": "Update News By News Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Update",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "is_published",
+											"value": "true",
+											"type": "text"
+										}
+									]
+								},
+								"url": "{{BASE_URL}}/news/admin/update-by-news/5c86e1c9-4ab4-4031-9def-3791fb7e3272"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete News By News Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "{{BASE_URL}}/news/admin/delete-by-news/5c86e1c9-4ab4-4031-9def-3791fb7e3272"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete By Admin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "{{BASE_URL}}/news/admin/delete-by-admin"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get All News",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/news/?page=1&limit=10",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"news",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get News By News Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}/news/5c86e1c9-4ab4-4031-9def-3791fb7e3272"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Agenda",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Get Own",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/agenda/admin/me?page=1&limit=10&is_published=true&type=KARANG_TARUNA",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"agenda",
+										"admin",
+										"me"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "is_published",
+											"value": "true"
+										},
+										{
+											"key": "type",
+											"value": "KARANG_TARUNA"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Agenda 1",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "Ini content Agenda 1",
+											"type": "text"
+										},
+										{
+											"key": "featured_image",
+											"type": "file",
+											"src": "postman-cloud:///1efb088b-e553-4230-aee6-a211d1c733a0"
+										},
+										{
+											"key": "is_published",
+											"value": "true",
+											"type": "text"
+										},
+										{
+											"key": "location",
+											"value": "Balai Kota",
+											"type": "text"
+										},
+										{
+											"key": "start_time",
+											"value": "2025-07-22T08:00:00.324Z",
+											"type": "text"
+										},
+										{
+											"key": "end_time",
+											"value": "2025-07-22T12:00:00.324Z",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "PKK",
+											"type": "text"
+										}
+									]
+								},
+								"url": "{{BASE_URL}}/agenda/admin/create"
+							},
+							"response": []
+						},
+						{
+							"name": "Update By Agenda Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Update",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "is_published",
+											"value": "false",
+											"type": "text"
+										}
+									]
+								},
+								"url": "{{BASE_URL}}/agenda/admin/update-by-agenda/0510d439-178a-4f60-9e01-218dd6cba0af"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete By Agenda Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "{{BASE_URL}}/agenda/admin/delete-by-agenda/0510d439-178a-4f60-9e01-218dd6cba0af"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete By Admin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "{{BASE_URL}}/agenda/admin/delete-by-admin"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/agenda/?page=1&limit=10",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"agenda",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "type",
+									"value": "KARANG_TARUNA",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}/agenda/696befc5-59f7-49cc-aed7-ad98dc743502"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Get Own",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/products/admin/me?page=1&limit=10",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"products",
+										"admin",
+										"me"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "is_published",
+											"value": "true",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Ini Product2",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Ini desc2",
+											"type": "text"
+										},
+										{
+											"key": "featured_image",
+											"type": "file",
+											"src": "postman-cloud:///1efb088b-e553-4230-aee6-a211d1c733a0"
+										},
+										{
+											"key": "price",
+											"value": "20000",
+											"type": "text"
+										},
+										{
+											"key": "category_id",
+											"value": "01198bfc-b9f3-4808-a579-c2f8864a53ae",
+											"type": "text"
+										},
+										{
+											"key": "link_whatsapp",
+											"value": "ini link whatsapp2",
+											"type": "text"
+										}
+									]
+								},
+								"url": "{{BASE_URL}}/products/admin/create"
+							},
+							"response": []
+						},
+						{
+							"name": "Update By Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Ini Product Update",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Ini desc Update ",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "20000",
+											"type": "text"
+										},
+										{
+											"key": "category_id",
+											"value": "f8e41d99-7b5b-4eed-a50c-394e24f662b2",
+											"type": "text"
+										},
+										{
+											"key": "link_whatsapp",
+											"value": "ini link whatsapp Update",
+											"type": "text"
+										}
+									]
+								},
+								"url": "{{BASE_URL}}/products/admin/update-by-product/38558d67-aa8c-4480-afe0-5b7627cd5ea0"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete By Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "{{BASE_URL}}/products/admin/delete-by-product/d0d4beaa-ff51-47f6-9c5f-31bc432795b4"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete By Admin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "{{BASE_URL}}/products/admin/delete-by-admin"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Categories",
+					"item": [
+						{
+							"name": "Get All",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "{{BASE_URL}}/products/admin/categories/"
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"mantap\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/products/admin/categories/"
+							},
+							"response": []
+						},
+						{
+							"name": "Update By Category Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"di update\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/products/admin/categories/5985d1e3-846c-480f-a1a3-b79aa83814f7"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete By Category Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "{{BASE_URL}}/products/admin/categories/5985d1e3-846c-480f-a1a3-b79aa83814f7"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Create Rating",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"rating\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/products/rating/8f9678a0-0661-41cb-a6b4-cfeb0c9e9ae4"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/products/?page=1&limit=10",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}/products/8f9678a0-0661-41cb-a6b4-cfeb0c9e9ae4"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"target_type\": \"NEWS\",\r\n    \"content\": \"Beritanya bagus banget1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/comments/create/9077a97d-062a-4d1b-8a10-07e2304d2e37"
+							},
+							"response": []
+						},
+						{
+							"name": "Update By Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\": \"Ini Baru Update\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{BASE_URL}}/comments/update/848caa1a-d817-4caa-91ae-544c724c1698"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete By Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "{{BASE_URL}}/comments/delete/53b4dbbf-b5d3-421b-ad6c-d5783a91c02b"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Special",
+					"item": [
+						{
+							"name": "Delete By Target Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/comments/delete-by-target/0510d439-178a-4f60-9e01-218dd6cba0af?targetType=AGENDA",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"comments",
+										"delete-by-target",
+										"0510d439-178a-4f60-9e01-218dd6cba0af"
+									],
+									"query": [
+										{
+											"key": "targetType",
+											"value": "AGENDA"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete By User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "{{BASE_URL}}/comments/delete-by-user/"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get By Target Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}/comments/9077a97d-062a-4d1b-8a10-07e2304d2e37"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Galeri",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "postman-cloud:///1efb088b-e553-4230-aee6-a211d1c733a0"
+										}
+									]
+								},
+								"url": "{{BASE_URL}}/galeri/admin/"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete By Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "{{BASE_URL}}/galeri/admin/3895971d-35c6-40a3-a68f-6245507e948"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}/galeri/"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "TOKEN",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

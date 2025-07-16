@@ -55,6 +55,7 @@ export class AuthService {
     return { token: token, user: userResponse };
   }
   static async delete(user: UserResponse, token: string) {
+    console.log("Deleting user with ID:", user.id);
     if (user.role === "ADMIN") {
       await Promise.all([
         axios.delete("http://localhost:3001/api/news/admin/delete-by-admin", {

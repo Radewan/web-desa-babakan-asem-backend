@@ -102,6 +102,8 @@ export class PrivateService {
         );
       }
     } else if (targetType === TargetType.AGENDA) {
+      console.log("Fetching agenda for target ID:", targetId);
+
       const agenda = await axios.get(
         `http://localhost:3001/api/agenda/${targetId}`
       );
