@@ -4,3 +4,5 @@ export const publicRouter = express.Router();
 
 publicRouter.get("/", PublicController.getAll);
 publicRouter.get("/:agendaId", PublicController.getById);
+publicRouter.get("/all-type/:agendaId", PublicController.getAllTypeById);
+

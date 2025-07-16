@@ -69,4 +69,26 @@ export class PublicService {
       comments: comments.data.comments,
     };
   }
+
+  static async getAllTypeById(agendaId: string) {
+    const agenda = await prismaClient.agenda.findUnique({
+      where: { id: agendaId },
+    });
+
+    if (!agenda) {
+      throw new ResponseError(404, "News not found");
+    }
+
+    const comments = await axios.get(
+      `http://localhost:3001/api/comments/${agendaId}`
+    );
+    const user = await axios.get(
+      `http://localhost:3002/api/users/${agenda.userId}`
+    );
+    return {
+      user_created: user.data.user,
+      agenda: agenda,
+      comments: comments.data.comments,
+    };
+  }
 }

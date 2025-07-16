@@ -542,6 +542,15 @@
 						"url": "{{BASE_URL}}/news/5c86e1c9-4ab4-4031-9def-3791fb7e3272"
 					},
 					"response": []
+				},
+				{
+					"name": "Get All Type By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}/news/all-type/5c86e1c9-4ab4-4031-9def-3791fb7e3272"
+					},
+					"response": []
 				}
 			]
 		},
@@ -682,7 +691,7 @@
 										}
 									]
 								},
-								"url": "{{BASE_URL}}/agenda/admin/update-by-agenda/0510d439-178a-4f60-9e01-218dd6cba0af"
+								"url": "{{BASE_URL}}/agenda/admin/update-by-agenda/c3e755d0-8d56-48a3-a9f2-37cbdec94c7d"
 							},
 							"response": []
 						},
@@ -697,7 +706,7 @@
 								},
 								"method": "DELETE",
 								"header": [],
-								"url": "{{BASE_URL}}/agenda/admin/delete-by-agenda/0510d439-178a-4f60-9e01-218dd6cba0af"
+								"url": "{{BASE_URL}}/agenda/admin/delete-by-agenda/c3e755d0-8d56-48a3-a9f2-37cbdec94c7d"
 							},
 							"response": []
 						},
@@ -757,6 +766,15 @@
 						"method": "GET",
 						"header": [],
 						"url": "{{BASE_URL}}/agenda/0510d439-178a-4f60-9e01-218dd6cba0af"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Type By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL}}/agenda/all-type/0510d439-178a-4f60-9e01-218dd6cba0af"
 					},
 					"response": []
 				}

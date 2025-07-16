@@ -93,7 +93,7 @@ export class PrivateService {
   ) {
     if (targetType === TargetType.NEWS) {
       const news = await axios.get(
-        `http://localhost:3001/api/news/${targetId}`
+        `http://localhost:3001/api/news/all-type/${targetId}`
       );
       if (news.data.news.userId !== user.id) {
         throw new ResponseError(
@@ -103,7 +103,7 @@ export class PrivateService {
       }
     } else if (targetType === TargetType.AGENDA) {
       const agenda = await axios.get(
-        `http://localhost:3001/api/agenda/${targetId}`
+        `http://localhost:3001/api/agenda/all-type/${targetId}`
       );
       if (agenda.data.agenda.userId !== user.id) {
         throw new ResponseError(

@@ -36,4 +36,13 @@ export class PublicController {
       next(error);
     }
   }
+
+  static async getAllTypeById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const response = await PublicService.getAllTypeById(req.params.agendaId);
+      res.status(200).json(response);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

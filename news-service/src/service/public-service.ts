@@ -31,12 +31,7 @@ export class PublicService {
         };
       })
     );
-    return toNewsWithUserGetAllResponse(
-      totalAgenda,
-      page,
-      limit,
-      newsWithUser
-    );
+    return toNewsWithUserGetAllResponse(totalAgenda, page, limit, newsWithUser);
   }
 
   static async getById(newsId: string) {
@@ -53,6 +48,28 @@ export class PublicService {
         view_count: { increment: 1 },
       },
     });
+
+    const comments = await axios.get(
+      `http://localhost:3001/api/comments/${newsId}`
+    );
+    const user = await axios.get(
+      `http://localhost:3002/api/users/${news.userId}`
+    );
+    return {
+      user_created: user.data.user,
+      news: news,
+      comments: comments.data.comments,
+    };
+  }
+
+  static async getAllTypeById(newsId: string) {
+    const news = await prismaClient.news.findUnique({
+      where: { id: newsId },
+    });
+
+    if (!news) {
+      throw new ResponseError(404, "News not found");
+    }
 
     const comments = await axios.get(
       `http://localhost:3001/api/comments/${newsId}`
