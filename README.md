@@ -27,7 +27,10 @@ Panduan ini membantu kamu menyiapkan dan menjalankan seluruh service dalam proye
    Contoh environment variable yang harus diisi:
 
    ```
-   DATABASE_URL=postgresql://postgres:@localhost:5432/yourDatabase
+   Kalo postgreesql
+   - DATABASE_URL=postgresql://postgres:@localhost:5432/yourDatabase
+   kalo mysql
+    - DATABASE_URL=mysql://root:@localhost:3306/yourDatabase
    PORT=yourPort
    JWT_SECRET_KEY=yourSecretKey
    JWT_SECRET_KEY_RESET=yourSecretKeyReset
@@ -40,7 +43,7 @@ Panduan ini membantu kamu menyiapkan dan menjalankan seluruh service dalam proye
    - Untuk `EMAIL_PASS`, buat App Password melalui link ini:  
      👉 https://myaccount.google.com/apppasswords  
      (Pastikan akun Gmail kamu sudah mengaktifkan verifikasi 2 langkah.)
-   - Untuk database masing-masing setiap service
+   - Untuk database masing-masing berbeda setiap service
 
 4. **Sesuaikan `PORT` di file `.env` sesuai dengan konfigurasi `gateway.config.yaml`:**
 
