@@ -13,12 +13,28 @@ import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { prismaClient } from "../application/database";
 import { transporter } from "../application/nodemailer";
-import { v4 as uuid } from "uuid";
-import { User } from "@prisma/client";
+import axios from "axios";
 
 export class UserService {
   static async register(request: UserRegisterRequest) {
     Validation.validate(UserValidation.register, request);
+
+    const googleResponse = await axios.post(
+      `https://www.google.com/recaptcha/api/siteverify`,
+      null,
+      {
+        params: {
+          secret: process.env.RECAPTCHA_SECRET_KEY,
+          response: request.re_captcha_token,
+        },
+      }
+    );
+
+    const { success } = googleResponse.data;
+
+    if (!success) {
+      throw new ResponseError(403, "reCAPTCHA verification failed");
+    }
 
     if (request.password !== request.confirm_password) {
       throw new ResponseError(400, "Passwords do not match");
@@ -64,6 +80,23 @@ export class UserService {
   }
   static async login(request: UserLoginRequest) {
     Validation.validate(UserValidation.login, request);
+
+    const googleResponse = await axios.post(
+      `https://www.google.com/recaptcha/api/siteverify`,
+      null,
+      {
+        params: {
+          secret: process.env.RECAPTCHA_SECRET_KEY,
+          response: request.re_captcha_token,
+        },
+      }
+    );
+
+    const { success } = googleResponse.data;
+
+    if (!success) {
+      throw new ResponseError(403, "reCAPTCHA verification failed");
+    }
 
     const user = await prismaClient.user.findUnique({
       where: { email: request.email },
@@ -120,7 +153,7 @@ export class UserService {
       },
     });
 
-    const resetLink = `http://localhost:3001/api/users/reset-password/${token}`;
+    const resetLink = `http://localhost:3000/reset-password?token=${token}`;
 
     const mailOptions = {
       from: '"App Support" ranggadendiakun@gmail.com',
@@ -130,6 +163,24 @@ export class UserService {
     };
 
     await transporter.sendMail(mailOptions);
+  }
+
+  static async verifyResetToken(token: string) {
+    console.log("Verifying reset token:", token);
+    let decoded;
+    try {
+      decoded = jwt.verify(token, process.env.JWT_SECRET_KEY_RESET!);
+    } catch (error) {
+      throw new ResponseError(400, "Invalid or expired token");
+    }
+    decoded = decoded as UserResponse;
+    const user = await prismaClient.user.findUnique({
+      where: { id: decoded.id },
+    });
+
+    if (!user) {
+      throw new ResponseError(404, "User not found");
+    }
   }
 
   static async resetPassword(request: UserResetPasswordRequest, token: string) {
@@ -160,7 +211,5 @@ export class UserService {
       where: { id: user.id },
       data: { password: hashedPassword },
     });
-
-    return { message: "Password reset successfully" };
   }
 }

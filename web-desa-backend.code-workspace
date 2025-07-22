@@ -23,6 +23,18 @@
     },
     {
       "path": "product-service"
+    },
+    {
+      "path": "organization-service"
+    },
+    {
+      "path": "pkk-service"
+    },
+    {
+      "path": "administrasi-service"
+    },
+    {
+      "path": "infografis-service"
     }
   ]
 }

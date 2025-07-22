@@ -13,8 +13,12 @@ export class AdminController {
         type = AgendaType.PKK;
       } else if (type === AgendaType.KARANG_TARUNA) {
         type = AgendaType.KARANG_TARUNA;
+      } else if (type === AgendaType.DPD) {
+        type = AgendaType.DPD;
       } else if (type === AgendaType.REGULAR) {
         type = AgendaType.REGULAR;
+      } else if (type === AgendaType.BPD) {
+        type = AgendaType.BPD;
       } else {
         type = undefined;
       }

@@ -6,4 +6,5 @@ export const privateRouter = express.Router();
 
 privateRouter.use(authMiddleware);
 
+privateRouter.get("/rating/:productId", PrivateController.alreadyRated);
 privateRouter.post("/rating/:productId", PrivateController.createRating);

@@ -1,5 +1,14 @@
 import { Galeri } from "@prisma/client";
 
+export interface GaleriCreateRequest {
+  title: string;
+}
+
+export interface GaleriUpdateRequest {
+  title?: string;
+  image?: string;
+}
+
 export interface GaleriGetAllResponse {
   total_page: number;
   page: number;

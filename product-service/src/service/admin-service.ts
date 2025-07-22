@@ -77,12 +77,7 @@ export class AdminService {
     if (!category) {
       throw new ResponseError(404, "Category not found");
     }
-    Promise.all([
-      await prismaClient.product.deleteMany({
-        where: { category_id: categoryId },
-      }),
-      await prismaClient.category.delete({ where: { id: categoryId } }),
-    ]);
+    await prismaClient.category.delete({ where: { id: categoryId } });
   }
 
   static async getOwn(user: UserResponse, page: number, limit: number) {

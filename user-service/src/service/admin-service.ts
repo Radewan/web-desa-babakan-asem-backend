@@ -11,34 +11,19 @@ import { Validation } from "../validation/validation";
 import bcrypt from "bcryptjs";
 
 export class AdminService {
-  static async getAllUser(
-    page: number,
-    limit: number,
-    role: Role,
-    search?: string
-  ) {
+  static async getAllUser(page: number = 1, limit: number = 10) {
     const users = await prismaClient.user.findMany({
       where: {
-        role: role,
-        OR: [
-          {
-            name: {
-              contains: search,
-              mode: "insensitive",
-            },
-          },
-          {
-            email: {
-              contains: search,
-              mode: "insensitive",
-            },
-          },
-        ],
+        role: Role.ADMIN,
       },
       skip: (page - 1) * limit,
       take: limit,
     });
-    const totalUser = await prismaClient.user.count({});
+    const totalUser = await prismaClient.user.count({
+      where: {
+        role: Role.ADMIN,
+      },
+    });
 
     return toUserAllResponse(page, limit, totalUser, users);
   }

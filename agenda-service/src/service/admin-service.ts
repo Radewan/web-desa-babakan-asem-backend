@@ -102,8 +102,8 @@ export class AdminService {
       data: {
         ...(request.title && { title: request.title }),
         ...(request.content && { content: request.content }),
-        ...(request.start_time && { start_date: request.start_time }),
-        ...(request.end_time && { end_date: request.end_time }),
+        ...(request.start_time && { start_time: request.start_time }),
+        ...(request.end_time && { end_time: request.end_time }),
         ...(request.location && { location: request.location }),
         ...(request.type && { type: request.type }),
         ...(request.is_published === true && {

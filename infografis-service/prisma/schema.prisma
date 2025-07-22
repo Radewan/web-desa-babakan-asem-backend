@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Resident {
+  id         String   @id @default(uuid())
+  title      String
+  amount     Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("residents")
+}
+
+model Idm {
+  id         String   @id @default(uuid())
+  year       Int
+  skor       Float
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("idms")
+}
+
+model ExtraIdm {
+  id          String     @id @default(uuid())
+  status_desa StatusDesa
+  sosial      Float
+  ekonomi     Float
+  lingkungan  Float
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
+
+  @@map("extra_idms")
+}
+
+enum StatusDesa {
+  MAJU
+  BERKEMBANG
+  MANDIRI
+  TERTINGGAL
+  SANGAT_TERTINGGAL
+}
+
+model SocialAssistance {
+  id         String   @id @default(uuid())
+  name       String
+  amount     Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("social_assistances")
+}
+
+model Sdgs {
+  id         String   @id @default(uuid())
+  name       String
+  progress   Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("sdgs")
+}

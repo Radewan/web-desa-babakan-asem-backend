@@ -1,0 +1,17 @@
+pesan all
+berita kita
+agenda kita
+produk kita
+user admin all
+
+Kelola administrasi sambung api
+Kelola infografis sambung api
+Dashboard sambung/buat api 
+infografis sambung api
+membuat rating sambung/buat? api
+Pkk sambung api
+
+sama testing
+dan responsive
+
+buat backend jangan microservice // minim bug

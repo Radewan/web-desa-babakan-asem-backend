@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Member {
+  id                String       @id @default(uuid())
+  name              String       @db.VarChar(255)
+  position          String       @db.VarChar(255)
+  profile_photo     String       @db.VarChar(255)
+  term_start        Int
+  term_end          Int
+  is_term           Boolean      @default(false)
+  important_level   Int          @default(1)
+  organization_type Organization
+
+  @@map("members")
+}
+
+enum Organization {
+  PEMERINTAH
+  PKK
+  KARANG_TARUNA
+  DPD
+  BPD
+}

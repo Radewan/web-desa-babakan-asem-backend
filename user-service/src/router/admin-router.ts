@@ -8,6 +8,6 @@ export const adminRouter = express.Router();
 adminRouter.use(authMiddleware);
 adminRouter.use(adminMiddleware);
 
-adminRouter.get("/admin", AdminController.getAllUser);
+adminRouter.get("/admin/user", AdminController.getAllUser);
 adminRouter.post("/admin", AdminController.createUser);
 adminRouter.patch("/admin/:userId", AdminController.updateRole);

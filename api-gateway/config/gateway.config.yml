@@ -23,6 +23,18 @@ apiEndpoints:
   product:
     path: /api/products/*
     target: http://localhost:3008
+  organization:
+    path: /api/organizations/*
+    target: http://localhost:3009
+  program:
+    path: /api/programs/*
+    target: http://localhost:3010
+  administrasi:
+    path: /api/administrasi/*
+    target: http://localhost:3011
+  infografis:
+    path: /api/infografis/*
+    target: http://localhost:3012
 serviceEndpoints:
   # see: http://www.express-gateway.io/docs/configuration/gateway.config.yml/serviceEndpoints
   user-service:
@@ -39,6 +51,14 @@ serviceEndpoints:
     url: http://localhost:3007
   product-service:
     url: http://localhost:3008
+  organization-service:
+    url: http://localhost:3009
+  program-service:
+    url: http://localhost:3010
+  administrasi-service:
+    url: http://localhost:3011
+  infografis-service:
+    url: http://localhost:3012
 policies:
   - proxy
 pipelines:
@@ -92,3 +112,31 @@ pipelines:
       - proxy:
           - action:
               serviceEndpoint: product-service
+  organization-pipeline:
+    apiEndpoints:
+      - organization
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: organization-service
+  program-pipeline:
+    apiEndpoints:
+      - program
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: program-service
+  administrasi-pipeline:
+    apiEndpoints:
+      - administrasi
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: administrasi-service
+  infografis-pipeline:
+    apiEndpoints:
+      - infografis
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: infografis-service

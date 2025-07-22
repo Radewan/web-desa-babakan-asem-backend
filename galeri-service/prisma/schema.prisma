@@ -16,6 +16,7 @@ datasource db {
 model Galeri {
   id         String   @id @default(uuid())
   image      String   @db.VarChar(255)
+  title      String   @db.VarChar(255)
   created_at DateTime @default(now())
   updated_at DateTime @default(now()) @updatedAt
 

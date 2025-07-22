@@ -8,25 +8,7 @@ export class AdminController {
     try {
       let page = parseInt(req.query.page as string) || 1;
       let limit = parseInt(req.query.limit as string) || 10;
-      let role = req.query.role || Role.REGULAR;
-      const search = req.query.search as string | undefined;
-      if (isNaN(page)) {
-        page = 1;
-      }
-      if (isNaN(limit)) {
-        limit = 10;
-      }
-      if (role === Role.ADMIN) {
-        role = Role.ADMIN;
-      } else {
-        role = Role.REGULAR;
-      }
-      const users = await AdminService.getAllUser(
-        page,
-        limit,
-        role as Role,
-        search
-      );
+      const users = await AdminService.getAllUser(page, limit);
       res.status(200).json(users);
     } catch (error) {
       next(error);

@@ -5,8 +5,20 @@ import { AdminService } from "../service/admin-service";
 export class AdminController {
   static async create(req: UserRequest, res: Response, next: NextFunction) {
     try {
-      const response = await AdminService.create(req.file);
+      const response = await AdminService.create(req.body, req.file);
       res.status(201).json(response);
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async update(req: UserRequest, res: Response, next: NextFunction) {
+    try {
+      const response = await AdminService.update(
+        req.params.galeriId,
+        req.body,
+        req.file
+      );
+      res.status(200).json(response);
     } catch (error) {
       next(error);
     }

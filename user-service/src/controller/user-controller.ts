@@ -26,9 +26,19 @@ export class UserController {
       next(error);
     }
   }
+
+  static async verifyResetToken(req: Request, res: Response, next: NextFunction) {
+    try {
+      await UserService.verifyResetToken(req.query.token as string);
+      res.status(204).json({});
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async resetPassword(req: Request, res: Response, next: NextFunction) {
     try {
-      await UserService.resetPassword(req.body, req.params.token);
+      await UserService.resetPassword(req.body, req.query.token as string);
       res.status(204).json({});
     } catch (error) {
       next(error);

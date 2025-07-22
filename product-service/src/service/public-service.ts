@@ -57,11 +57,11 @@ export class PublicService {
     const comments = await axios.get(
       `http://localhost:3001/api/comments/${productId}`
     );
-    const user = await axios.get(
-      `http://localhost:3002/api/users/${product.user_id}`
-    );
+    // const user = await axios.get(
+    //   `http://localhost:3002/api/users/${product.user_id}`
+    // );
     return {
-      user_created: user.data.user,
+      // user_created: user.data.user,
       rating: averageRating,
       product: product,
       comments: comments.data.comments,

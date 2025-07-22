@@ -5,6 +5,34 @@ import { RatingValidation } from "../validation/rating-validation";
 import { Validation } from "../validation/validation";
 
 export class PrivateService {
+  static async alreadyRated(
+    productId: string,
+    user: UserResponse
+  ): Promise<{ rated: boolean; rating?: number }> {
+    const product = await prismaClient.product.findUnique({
+      where: { id: productId },
+    });
+
+    if (!product) {
+      throw new ResponseError(404, "Product not found");
+    }
+
+    const rating = await prismaClient.rating.findFirst({
+      where: {
+        user_id: user.id,
+        product_id: productId,
+      },
+    });
+
+    if (!rating) {
+      return { rated: false };
+    }
+
+    return {
+      rating: rating.rating,
+      rated: !!rating,
+    };
+  }
   static async createRating(
     request: { rating: number },
     productId: string,

@@ -25,7 +25,7 @@ model Product {
   created_at     DateTime @default(now())
   updated_at     DateTime @updatedAt
 
-  category Category @relation(fields: [category_id], references: [id])
+  category Category @relation(fields: [category_id], references: [id], onDelete: Cascade)
   ratings  Rating[]
 
   @@map("products")
@@ -50,7 +50,7 @@ model Rating {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  product Product @relation(fields: [product_id], references: [id])
+  product Product @relation(fields: [product_id], references: [id], onDelete: Cascade)
 
   @@map("ratings")
 }

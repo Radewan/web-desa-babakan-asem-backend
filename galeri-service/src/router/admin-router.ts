@@ -10,4 +10,5 @@ adminRouter.use(authMiddleware);
 adminRouter.use(adminMiddleware);
 
 adminRouter.post("/", upload.single("image"), AdminController.create);
+adminRouter.put("/:galeriId", upload.single("image"), AdminController.update);
 adminRouter.delete("/:galeriId", AdminController.delete);

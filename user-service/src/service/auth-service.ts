@@ -38,6 +38,19 @@ export class AuthService {
       request.password = await bcryptjs.hash(request.password, 10);
     }
 
+    if (request.email) {
+      const emailExists = await prismaClient.user.count({
+        where: {
+          email: request.email,
+          id: { not: user.id },
+        },
+      });
+
+      if (emailExists !== 0) {
+        throw new ResponseError(400, "Email already registered");
+      }
+    }
+
     const userUpdate = await prismaClient.user.update({
       where: { id: user.id },
       data: {
@@ -47,12 +60,7 @@ export class AuthService {
       },
     });
 
-    const userResponse = toUserResponse(userUpdate);
-    const token = jwt.sign(userResponse, process.env.JWT_SECRET_KEY!, {
-      expiresIn: "1W",
-    });
-
-    return { token: token, user: userResponse };
+    return { user: toUserResponse(userUpdate) };
   }
   static async delete(user: UserResponse, token: string) {
     if (user.role === "ADMIN") {

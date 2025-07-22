@@ -12,7 +12,7 @@ export interface UserResponse {
 export interface UserAllResponse {
   page: number;
   limit: number;
-  total_pages: number;
+  total_page: number;
   users: UserResponse[];
 }
 
@@ -22,12 +22,14 @@ export interface UserRegisterRequest {
   password: string;
   confirm_password: string;
   remember_me: boolean;
+  re_captcha_token: string;
 }
 
 export interface UserLoginRequest {
   email: string;
   password: string;
   remember_me: boolean;
+  re_captcha_token: string;
 }
 
 export interface UserUpdateRequest {
@@ -73,7 +75,7 @@ export const toUserAllResponse = (
   return {
     page: page,
     limit: limit,
-    total_pages: Math.ceil(total / limit),
+    total_page: Math.ceil(total / limit),
     users: users.map(toUserResponse),
   };
 };

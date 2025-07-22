@@ -8,11 +8,13 @@ export class UserValidation {
     password: z.string().min(6),
     confirm_password: z.string().min(6),
     remember_me: z.boolean(),
+    re_captcha_token: z.string(),
   });
   static login: ZodType = z.object({
     email: z.string().email(),
     password: z.string().min(6),
     remember_me: z.boolean(),
+    re_captcha_token: z.string(),
   });
 
   static forgotPassword: ZodType = z.object({
